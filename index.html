@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolagem de Dados RPG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simulador de Rolagem de Dados RPG</h1>
+    </header>
+
+    <main>
+        <!-- Seção de Seleção de Dados -->
+        <section id="dados">
+            <h2>Escolha o tipo de dado e quantos rolar</h2>
+            <div class="dice-container">
+                <!-- Botões para selecionar diferentes tipos de dados -->
+                <button class="dado" data-dado="4" aria-label="Rolar dado de 4 lados" onclick="console.log('Dado D4 selecionado')">D4</button>
+                <button class="dado" data-dado="6" aria-label="Rolar dado de 6 lados" onclick="console.log('Dado D6 selecionado')">D6</button>
+                <button class="dado" data-dado="8" aria-label="Rolar dado de 8 lados" onclick="console.log('Dado D8 selecionado')">D8</button>
+                <button class="dado" data-dado="10" aria-label="Rolar dado de 10 lados" onclick="console.log('Dado D10 selecionado')">D10</button>
+                <button class="dado" data-dado="12" aria-label="Rolar dado de 12 lados" onclick="console.log('Dado D12 selecionado')">D12</button>
+                <button class="dado" data-dado="20" aria-label="Rolar dado de 20 lados" onclick="console.log('Dado D20 selecionado')">D20</button>
+                <button class="dado" data-dado="100" aria-label="Rolar dado de 100 lados" onclick="console.log('Dado D100 selecionado')">D100</button>
+            </div>
+        </section>
+
+        <!-- Exibir dados selecionados como cartões -->
+        <section id="dado-selecionado">
+            <h2>Dados Selecionados:</h2>
+            <div id="listaDadosSelecionados" class="dados-selecionados-container">
+                <!-- Aqui os cartões dos dados selecionados vão aparecer -->
+            </div>
+            <!-- Botão para limpar a seleção de dados -->
+            <button id="limparDados" onclick="console.log('Botão de limpar seleção clicado')">Limpar Seleção</button>
+        </section>
+
+        <!-- Seção para adicionar modificador -->
+        <section id="modificador">
+            <h2>Modificador</h2>
+            <div class="modificador-container">
+                <!-- Botão para diminuir o valor do modificador -->
+                <button id="diminuirMod" class="mod-btn" onclick="console.log('Botão de diminuir modificador clicado')">-</button>
+                <!-- Campo de entrada para o valor do modificador -->
+                <input type="number" id="inputModificador" value="0" min="-10" max="10" oninput="console.log('Valor do modificador alterado para: ' + this.value)" />
+                <!-- Botão para aumentar o valor do modificador -->
+                <button id="aumentarMod" class="mod-btn" onclick="console.log('Botão de aumentar modificador clicado')">+</button>
+            </div>
+            <p class="mod-desc">Adicione ou subtraia um modificador à sua rolagem.</p>
+        </section>
+
+        <!-- Botão de rolar o dado -->
+        <section id="rolagem">
+            <!-- Este botão é desativado até que algum dado seja selecionado -->
+            <button id="rolarDado" disabled onclick="console.log('Botão de rolar dados clicado')">Rolar Dados</button>
+        </section>
+
+        <!-- Resultado da rolagem -->
+        <section id="resultado">
+            <h2>Resultado:</h2>
+            <div class="resultado-container">
+                <!-- Exibe o valor total da rolagem dos dados -->
+                <p id="resultadoTotal">Total: -</p>
+                <!-- Exibe detalhes da rolagem dos dados, como valores individuais -->
+                <p id="detalhesRolagem"></p>
+            </div>
+        </section>
+
+        <!-- Histórico de rolagens -->
+        <section id="historico">
+            <h2>Histórico de Rolagens</h2>
+            <div id="historicoLista" class="historico-container">
+                <!-- Cada rolagem é como um cartão detalhado no histórico -->
+            </div>
+            <div class="scroll-buttons">
+                <!-- Botão para rolar a página do histórico até o topo -->
+                <button id="scrollTop" onclick="console.log('Botão para subir ao topo clicado')">⬆️ Subir para o Topo</button>
+                <!-- Botão para rolar a página do histórico até o final -->
+                <button id="scrollBottom" onclick="console.log('Botão para descer ao fim clicado')">⬇️ Descer para o Fim</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

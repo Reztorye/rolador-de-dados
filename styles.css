@@ -1,0 +1,366 @@
+/* CSS atualizado com as novas cores e ajustes no estilo */
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body e Layout Geral */
+body {
+  background: linear-gradient(135deg, #d0dccb, #b3c5ba);
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo do Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: #88c3b5;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #6d6168;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Layout Principal */
+main {
+  width: 100%;
+  margin: 0;
+  padding: 30px;
+  background-color: #d0dccb;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Títulos Secundários */
+h2 {
+  color: #6d6168;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Contêiner de Dados */
+.dice-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+/* Botões de Dado */
+.dado {
+  padding: 12px 25px;
+  background-color: #88c3b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dado:hover {
+  background-color: #6d6168;
+  transform: translateY(-3px);
+}
+
+/* Botão de Rolar Dados */
+#rolarDado {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #88c3b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  grid-column: span 2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  outline: 3px solid transparent;
+}
+
+#rolarDado:focus {
+  outline: 3px solid #b3c5ba;
+}
+
+#rolarDado:hover {
+  background-color: #6d6168;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Resultados de Rolagem */
+#resultado {
+  margin-top: 40px;
+  text-align: center;
+  grid-column: span 2;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#resultado.mostrar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.resultado-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#resultadoValor {
+  font-size: 2.5rem;
+  color: #6d6168;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#resultadoTotal {
+  font-size: 2.5rem;
+  color: #6d6168;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#detalhesRolagem {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #6d6168;
+}
+
+/* Histórico de Rolagens */
+#historico {
+  grid-column: span 2;
+}
+
+#historicoLista {
+  list-style-type: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+#historicoLista::-webkit-scrollbar {
+  width: 10px;
+}
+
+#historicoLista::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#historicoLista::-webkit-scrollbar-thumb {
+  background: #88c3b5;
+  border-radius: 10px;
+}
+
+#historicoLista::-webkit-scrollbar-thumb:hover {
+  background: #6d6168;
+}
+
+.historico-item {
+  border: 1px solid #88c3b5;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.historico-item:hover {
+  background-color: #d3f3ea;
+  color: #474044;
+}
+
+.historico-item:focus-within {
+  background-color: #3e7b6a;
+  color: #474044;
+}
+
+.historico-item .timestamp {
+  color: #474044;
+  transition: color 0.3s ease;
+}
+
+.historico-item:hover .timestamp, .historico-item:focus-within .timestamp {
+  color: #474044;
+}
+
+/* Botões de Rolagem do Histórico */
+.scroll-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.scroll-buttons button {
+  padding: 12px;
+  background-color: #88c3b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.scroll-buttons button:hover {
+  background-color: #6d6168;
+  transform: translateY(-3px);
+}
+
+#dado-selecionado {
+  text-align: center;
+}
+
+/* Lista de Dados Selecionados */
+#listaDadosSelecionados {
+  list-style-type: none;
+  padding: 0;
+}
+
+#listaDadosSelecionados li {
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+/* Botão Limpar Dados Selecionados */
+#limparDados {
+  padding: 12px 20px;
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#limparDados:hover {
+  background-color: #cc3a3a;
+  transform: translateY(-3px);
+}
+
+/* Estilos dos Dados Selecionados */
+.dados-selecionados-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.dado-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #88c3b5;
+  color: white;
+  border-radius: 8px;
+  min-width: 100px;
+  font-size: 1.2rem;
+}
+
+.dado-card button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding-left: 10px;
+}
+
+.dado-card button:hover {
+  color: #ff4c4c;
+}
+
+/* Estilos para a Área de Modificador */
+#modificador {
+  text-align: center;
+}
+
+.modificador-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+input[type="number"] {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 5px;
+  margin: 0 10px;
+  border-radius: 8px;
+  border: 2px solid #b3c5ba;
+  min-width: 100px;
+}
+
+@media (max-width: 600px) {
+  input[type="number"] {
+    width: 80%; 
+  }
+}
+
+.mod-btn {
+  padding: 10px 15px;
+  font-size: 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mod-btn:hover {
+  background-color: #3e8e41;
+}
+
+.mod-desc {
+  color: #6d6168;
+  font-size: 0.9rem;
+}
+
+em {
+  color: #6d6168;
+}
