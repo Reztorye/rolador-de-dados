@@ -1,4 +1,4 @@
-/* CSS atualizado com as novas cores e ajustes no estilo */
+/* CSS atualizado com as novas cores, ajustes no estilo e implementação de canvas, melhorias na responsividade para celulares e tablets */
 
 /* Reset CSS */
 * {
@@ -23,32 +23,46 @@ header {
   text-align: center;
   margin-bottom: 30px;
   background-color: #88c3b5;
-  padding: 30px;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #6d6168;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+@media (min-width: 600px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
 /* Layout Principal */
 main {
   width: 100%;
-  margin: 0;
-  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   background-color: #d0dccb;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 1fr;
-  gap: 30px;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  main {
+    padding: 30px;
+    gap: 30px;
+  }
 }
 
 @media (min-width: 768px) {
   main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
   }
 }
 
@@ -62,28 +76,49 @@ main {
 h2 {
   color: #6d6168;
   margin-bottom: 20px;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  h2 {
+    font-size: 1.8rem;
+  }
 }
 
 /* Contêiner de Dados */
 .dice-container {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 30px;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .dice-container {
+    justify-content: space-around;
+    gap: 20px;
+  }
 }
 
 /* Botões de Dado */
 .dado {
-  padding: 12px 25px;
+  padding: 8px 15px;
   background-color: #88c3b5;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+@media (min-width: 600px) {
+  .dado {
+    padding: 12px 25px;
+    font-size: 1.3rem;
+  }
 }
 
 .dado:hover {
@@ -91,21 +126,46 @@ h2 {
   transform: translateY(-3px);
 }
 
+/* Canvas para ilustração dos resultados */
+#resultadoCanvas {
+  width: 100%;
+  max-width: 600px;
+  height: 200px;
+  background-color: #f9f9f9;
+  border: 2px solid #88c3b5;
+  border-radius: 10px;
+  margin: 20px auto;
+  display: block;
+}
+
+@media (min-width: 600px) {
+  #resultadoCanvas {
+    height: 300px;
+  }
+}
+
 /* Botão de Rolar Dados */
 #rolarDado {
   display: block;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   background-color: #88c3b5;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   grid-column: span 2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   outline: 3px solid transparent;
+}
+
+@media (min-width: 600px) {
+  #rolarDado {
+    padding: 15px;
+    font-size: 1.5rem;
+  }
 }
 
 #rolarDado:focus {
@@ -120,7 +180,7 @@ h2 {
 
 /* Resultados de Rolagem */
 #resultado {
-  margin-top: 40px;
+  margin-top: 30px;
   text-align: center;
   grid-column: span 2;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
@@ -140,23 +200,41 @@ h2 {
 }
 
 #resultadoValor {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #6d6168;
   margin-top: 10px;
   font-weight: bold;
 }
 
+@media (min-width: 600px) {
+  #resultadoValor {
+    font-size: 2.5rem;
+  }
+}
+
 #resultadoTotal {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #6d6168;
   margin-top: 10px;
   font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  #resultadoTotal {
+    font-size: 2.5rem;
+  }
 }
 
 #detalhesRolagem {
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #6d6168;
+}
+
+@media (min-width: 600px) {
+  #detalhesRolagem {
+    font-size: 1.2rem;
+  }
 }
 
 /* Histórico de Rolagens */
@@ -167,11 +245,17 @@ h2 {
 #historicoLista {
   list-style-type: none;
   padding: 0;
-  max-height: 300px;
+  max-height: 150px;
   overflow-y: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
+}
+
+@media (min-width: 600px) {
+  #historicoLista {
+    max-height: 300px;
+  }
 }
 
 #historicoLista::-webkit-scrollbar {
@@ -192,14 +276,27 @@ h2 {
   background: #6d6168;
 }
 
+/* Cross-browser scrollbar styles */
+#historicoLista {
+  scrollbar-width: thin;
+  scrollbar-color: #88c3b5 #f1f1f1;
+}
+
 .historico-item {
   border: 1px solid #88c3b5;
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 8px;
+  margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 600px) {
+  .historico-item {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 .historico-item:hover {
@@ -225,19 +322,27 @@ h2 {
 .scroll-buttons {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .scroll-buttons button {
-  padding: 12px;
+  padding: 8px;
   background-color: #88c3b5;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+@media (min-width: 600px) {
+  .scroll-buttons button {
+    padding: 12px;
+    font-size: 1.1rem;
+  }
 }
 
 .scroll-buttons button:hover {
@@ -257,20 +362,33 @@ h2 {
 
 #listaDadosSelecionados li {
   margin: 5px 0;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 600px) {
+  #listaDadosSelecionados li {
+    font-size: 1.2rem;
+  }
 }
 
 /* Botão Limpar Dados Selecionados */
 #limparDados {
-  padding: 12px 20px;
+  padding: 8px 12px;
   background-color: #ff4c4c;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+@media (min-width: 600px) {
+  #limparDados {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+  }
 }
 
 #limparDados:hover {
@@ -291,12 +409,19 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 8px;
   background-color: #88c3b5;
   color: white;
   border-radius: 8px;
-  min-width: 100px;
-  font-size: 1.2rem;
+  min-width: 70px;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 600px) {
+  .dado-card {
+    min-width: 100px;
+    font-size: 1.2rem;
+  }
 }
 
 .dado-card button {
@@ -304,7 +429,7 @@ h2 {
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding-left: 10px;
 }
 
@@ -322,34 +447,44 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-bottom: 5px;
+  flex-wrap: wrap;
 }
 
 input[type="number"] {
   width: 100%;
-  max-width: 300px;
+  max-width: 180px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 5px;
-  margin: 0 10px;
+  margin: 5px 10px;
   border-radius: 8px;
   border: 2px solid #b3c5ba;
-  min-width: 100px;
+  min-width: 70px;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 600px) {
   input[type="number"] {
-    width: 80%; 
+    max-width: 300px;
+    font-size: 1.5rem;
   }
 }
 
 .mod-btn {
-  padding: 10px 15px;
-  font-size: 1.5rem;
+  padding: 8px 10px;
+  font-size: 1.2rem;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  margin: 5px;
+}
+
+@media (min-width: 600px) {
+  .mod-btn {
+    padding: 10px 15px;
+    font-size: 1.5rem;
+  }
 }
 
 .mod-btn:hover {
@@ -358,7 +493,13 @@ input[type="number"] {
 
 .mod-desc {
   color: #6d6168;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 600px) {
+  .mod-desc {
+    font-size: 0.9rem;
+  }
 }
 
 em {
