@@ -1,4 +1,4 @@
-// script.js
+// script.js - Código atualizado para implementar o botão de acessibilidade com contraste preto e amarelo aplicado em todo o site
 
 // Variáveis Globais
 let dadosSelecionados = []; // Array para armazenar os dados selecionados
@@ -73,6 +73,8 @@ function atualizarListaDadosSelecionados() {
         const dado = dadosSelecionados[i];
         const dadoCard = document.createElement('div');
         dadoCard.classList.add('dado-card');
+        dadoCard.style.padding = '5px';
+        dadoCard.style.marginBottom = '5px';
 
         const dadoInfo = document.createElement('span');
         dadoInfo.textContent = `${dado.quantidade}D${dado.tipo}`;
@@ -177,6 +179,8 @@ function adicionarAoHistorico(detalhes, resultado) {
     console.log("Adicionando ao histórico. Detalhes:", detalhes, "Resultado:", resultado);
     const historicoItem = document.createElement('div');
     historicoItem.classList.add('historico-item');
+    historicoItem.style.padding = '10px';
+    historicoItem.style.marginBottom = '10px';
 
     const timestamp = new Date().toLocaleString();
     const timestampDiv = document.createElement('div');
@@ -184,7 +188,6 @@ function adicionarAoHistorico(detalhes, resultado) {
     timestampDiv.innerHTML = `<em>${timestamp}</em>`;
     timestampDiv.style.marginBottom = "10px";
     timestampDiv.style.fontSize = "0.9rem";
-    timestampDiv.style.color = "#ffffff";
 
     const detalhesDiv = document.createElement('div');
     detalhesDiv.classList.add('detalhes');
@@ -196,7 +199,6 @@ function adicionarAoHistorico(detalhes, resultado) {
     totalDiv.innerHTML = `<strong>Total:</strong> ${resultado}`;
     totalDiv.style.fontSize = "1.2rem";
     totalDiv.style.fontWeight = "bold";
-    totalDiv.style.color = "#88c3b5";
 
     historicoItem.appendChild(timestampDiv);
     historicoItem.appendChild(detalhesDiv);
@@ -219,3 +221,86 @@ document.getElementById('scrollTop').addEventListener('click', () => {
 document.getElementById('scrollBottom').addEventListener('click', () => {
     historicoLista.scrollTop = historicoLista.scrollHeight;
 });
+
+// Código JavaScript para implementar um botão de acessibilidade que altera o contraste para preto e amarelo baseado no projeto existente
+
+// Criação do botão de acessibilidade
+const botaoAcessibilidade = document.createElement('button');
+botaoAcessibilidade.id = 'botaoContraste';
+botaoAcessibilidade.textContent = 'Ativar Contraste Alto';
+botaoAcessibilidade.classList.add('acessibilidade-botao');
+document.body.appendChild(botaoAcessibilidade);
+
+// Função para ativar/desativar o modo de contraste alto
+botaoAcessibilidade.addEventListener('click', () => {
+    const body = document.body;
+    const contrasteAtivo = body.classList.toggle('contraste-alto');
+    botaoAcessibilidade.textContent = contrasteAtivo ? 'Desativar Contraste Alto' : 'Ativar Contraste Alto';
+});
+
+// Estilos para o modo de contraste alto e botão de acessibilidade
+const estiloContrasteAlto = document.createElement('style');
+estiloContrasteAlto.innerHTML = `
+  .contraste-alto {
+    background-color: #000 !important;
+    color: #ff0 !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #ff0 #000 !important;
+  }
+  .contraste-alto * {
+    background-color: #000 !important;
+    color: #ff0 !important;
+    border-color: #ff0 !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #ff0 #000 !important;
+  }
+  .contraste-alto .total {
+    color: #ff0 !important;
+  }
+
+  .contraste-alto body {
+    background: #000 !important;
+    background-image: none !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #ff0 #000 !important;
+  }
+
+  .contraste-alto .historico-item {
+    border-color: #ff0 !important;
+    scrollbar-width: thin!important ;
+    scrollbar-color: #ff0 #000 !important;
+  }
+
+  .contraste-alto .historicolista {
+    border-color: #ff0 !important;
+    scrollbar-width: thin !important; 
+    scrollbar-color: #ff0 #000 !important ;
+  }
+
+  .contraste-alto button {
+    border: 1px solid #ff0 !important;
+  }
+
+  .contraste-alto {
+    background: #000 !important;
+    background-image: none !important;
+  }
+
+  #botaoContraste {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #000;
+    color: #ff0;
+    border: 1px solid #ff0;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  #botaoContraste:hover {
+    background-color: #ff0;
+    color: #000;
+  }
+`;
+document.head.appendChild(estiloContrasteAlto);
