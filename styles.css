@@ -53,6 +53,14 @@ main {
   gap: 20px;
 }
 
+@media (max-width: 600px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (min-width: 600px) {
   main {
     padding: 30px;
@@ -62,7 +70,7 @@ main {
 
 @media (min-width: 768px) {
   main {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
   }
 }
 
@@ -114,6 +122,13 @@ h2 {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+@media (max-width: 480px) {
+  .dado {
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+}
+
 @media (min-width: 600px) {
   .dado {
     padding: 12px 25px;
@@ -144,6 +159,12 @@ h2 {
   }
 }
 
+@media (min-width: 1200px) {
+  #resultadoCanvas {
+    height: 400px;
+  }
+}
+
 /* Botão de Rolar Dados */
 #rolarDado {
   display: block;
@@ -155,10 +176,10 @@ h2 {
   border-radius: 8px;
   font-size: 1.2rem;
   cursor: pointer;
-  grid-column: span 2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   outline: 3px solid transparent;
+  margin-top: 20px;
 }
 
 @media (min-width: 600px) {
@@ -180,9 +201,8 @@ h2 {
 
 /* Resultados de Rolagem */
 #resultado {
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: center;
-  grid-column: span 2;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
@@ -240,6 +260,7 @@ h2 {
 /* Histórico de Rolagens */
 #historico {
   grid-column: span 2;
+  margin-top: 30px;
 }
 
 #historicoLista {
@@ -255,6 +276,12 @@ h2 {
 @media (min-width: 600px) {
   #historicoLista {
     max-height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #historicoLista {
+    max-height: 500px;
   }
 }
 
@@ -440,6 +467,14 @@ h2 {
 /* Estilos para a Área de Modificador */
 #modificador {
   text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  #modificador {
+    order: 1;
+    margin-top: 20px;
+  }
 }
 
 .modificador-container {
