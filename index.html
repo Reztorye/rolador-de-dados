@@ -5,22 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rolagem de Dados RPG</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
-    <header style="position: relative;">
+    <header>
         <h1>Simulador de Rolagem de Dados RPG</h1>
-        <!-- Aba de Usuário -->
-         <!-- Aba de Usuário -->
-        <div id="usuario">
-        <button id="botaoUsuario" onclick="toggleAbaUsuario()">Usuário</button>
-        <div id="abaUsuario" class="oculto">
-            <p>Bem-vindo, <span id="nomeUsuario">Visitante</span>!</p>
-            <button id="editarPerfil" onclick="editarPerfil()">Editar Perfil</button>
-            <button id="sair" onclick="logout()">Sair</button>
+        <div class="header-buttons">
+            <button id="ajudaBtn" onclick="abrirAjuda()">Ajuda</button>
+            <div id="usuario">
+                <button id="botaoUsuario" onclick="toggleAbaUsuario()">Usuário</button>
+                <div id="abaUsuario" class="oculto">
+                    <p>Bem-vindo, <span id="nomeUsuario">Visitante</span>!</p>
+                    <button id="editarPerfil" onclick="editarPerfil()">Editar Perfil</button>
+                    <button id="sair" onclick="logout()">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+    <!-- Modal de Ajuda Atualizado -->
+    <div id="modalAjuda" class="modal oculto" role="dialog" aria-labelledby="tituloAjuda" aria-hidden="true">
+        <div class="modal-content">
+            <button class="fechar" aria-label="Fechar" onclick="fecharAjuda()">&times;</button>
+            <h2 id="tituloAjuda">Bem-vindo ao Simulador de RPG!</h2>
+            <p>Este simulador é uma ferramenta completa que ajuda você a rolar dados e gerenciar suas aventuras em RPG. Ele foi projetado para ser intuitivo e acessível, mesmo para quem nunca jogou RPG antes!</p>
+            
+            <h3><span class="material-icons">help</span> O que é RPG?</h3>
+            <p>RPG (Role-Playing Game) é um tipo de jogo em que os participantes assumem os papéis de personagens em um mundo fictício, criando narrativas colaborativas. As ações dos personagens são determinadas por um sistema formal de regras e diretrizes, e a sorte é frequentemente envolvida através de rolagens de dados.</p>
+            
+            <h3><span class="material-icons">casino</span> Como Funciona?</h3>
+            <p>Nosso simulador permite que você escolha diferentes tipos de dados, defina quantas vezes quer rolar cada um e aplique modificadores para simular situações de jogo. É uma ferramenta ideal para mestres e jogadores que desejam agilizar suas sessões.</p>
+            
+            <h3>Como Usar o Simulador?</h3>
+            <ol>
+                <li><strong>Selecione os Dados:</strong> Escolha entre dados de 4, 6, 8, 10, 12, 20 ou 100 faces.</li>
+                <li><strong>Defina a Quantidade:</strong> Indique quantas vezes deseja rolar cada dado.</li>
+                <li><strong>Aplique Modificadores:</strong> Adicione bônus ou penalidades que afetem a rolagem.</li>
+                <li><strong>Rolar os Dados:</strong> Clique no botão "Rolar Dados" para realizar as rolagens e ver os resultados.</li>
+                <li><strong>Visualize os Resultados:</strong> Veja o total, os valores individuais e detalhes adicionais.</li>
+            </ol>
+            
+            <h3>Dica Adicional:</h3>
+            <p>Utilize o <strong>Histórico de Rolagens</strong> para acompanhar todas as suas rolagens anteriores. Você pode filtrar por data, subir para o topo, descer para o fim, apagar o histórico ou baixar os dados para referência futura.</p>
+            
+            <button onclick="fecharAjuda()">Pronto para Começar!</button>
         </div>
     </div>
-    </div>
-    </header>
 
     <main>
         <!-- Seção de Seleção de Dados -->
@@ -82,6 +114,16 @@
         <!-- Histórico de rolagens -->
         <section id="historico">
             <h2>Histórico de Rolagens</h2>
+            
+            <div id="filtro-data">
+                <label for="filtroData">Filtrar por Data:</label>
+                <input type="date" id="filtroData" />
+                <button id="filtrarBtn" onclick="aplicarFiltroPorData()">Filtrar</button>
+                <button id="limparFiltroBtn" onclick="limparFiltro()">Limpar Filtro</button>
+            </div>
+            
+
+            
             <div id="historicoLista" class="historico-container">
                 <!-- Cada rolagem é como um cartão detalhado no histórico -->
             </div>
@@ -94,9 +136,21 @@
 
                 <button id="apagarHistorico" data-tooltip="Apagar o histórico de rolagens" onclick="apagarHistorico()">Apagar Histórico</button>
 
+                <button id="baixarDados" data-tooltip="Baixar o histórico de rolagens" onclick="baixarDados()">Baixar Dados</button>
             </div>
         </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Simulador de Rolagem de Dados RPG. Todos os direitos reservados.</p>
+            <nav class="footer-nav">
+                <a href="#dados">Selecionar Dados</a>
+                <a href="#modificador">Modificador</a>
+                <a href="#historico">Histórico</a>
+            </nav>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

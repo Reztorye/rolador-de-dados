@@ -158,3 +158,41 @@ input[type="checkbox"] {
     padding: 0.75em;
   }
 }
+/* Ocultar formulário alternativo */
+.oculto {
+  display: none;
+}
+
+/* Estilo do botão para alternar entre login e registro */
+.switch-button {
+  background: none;
+  border: none;
+  color: #6d6168;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
+.switch-button:hover {
+  color: #88c3b5;
+}
+
+/* Botão de registro */
+.register-button {
+  width: 100%;
+  padding: 1em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

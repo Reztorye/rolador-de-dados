@@ -16,19 +16,34 @@
                 <input type="text" id="username" name="username" autocomplete="username" required>
             </div>
             <div class="input-group">
-                <label for="password">Senha <span class="tooltip" title="A senha deve ter pelo menos 8 caracteres.">?</span></label>
+                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" autocomplete="current-password" required>
-                <button type="button" id="togglePassword">Mostrar</button>
+            </div>
+            <button type="submit" class="login-button">Entrar</button>
+            <a href="#" class="switch-button" onclick="esqueciSenha()">Esqueci a senha</a>
+            <button type="button" class="switch-button" onclick="toggleForms('register')">Criar Conta</button>
+        </form>
+    
+        <form id="registerForm" class="oculto" novalidate>
+            <h1>Criação de Usuário</h1>
+            <div id="register-error-message" class="error-message" aria-live="polite"></div>
+            <div class="input-group">
+                <label for="register-username">Usuário</label>
+                <input type="text" id="register-username" name="register-username" required>
             </div>
             <div class="input-group">
-                <input type="checkbox" id="rememberMe" name="rememberMe">
-                <label for="rememberMe">Lembrar-me</label>
+                <label for="register-password">Senha</label>
+                <input type="password" id="register-password" name="register-password" required>
             </div>
-            
-            <button type="submit" class="login-button" aria-label="Entrar na conta">Entrar</button>
-            
+            <div class="input-group">
+                <label for="register-confirm-password">Confirmar Senha</label>
+                <input type="password" id="register-confirm-password" name="register-confirm-password" required>
+            </div>
+            <button type="submit" class="register-button">Registrar</button>
+            <button type="button" class="switch-button" onclick="toggleForms('login')">Já tenho conta</button>
         </form>
     </div>
+    
     <script src="login_script.js"></script>
 </body>
 </html>

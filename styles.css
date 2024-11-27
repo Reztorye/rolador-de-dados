@@ -18,14 +18,6 @@ body {
   flex-direction: column;
 }
 
-/* Estilo do Cabeçalho */
-header {
-  text-align: center;
-  margin-bottom: 30px;
-  background-color: #88c3b5;
-  padding: 20px;
-}
-
 h1 {
   font-size: 1.8rem;
   color: #6d6168;
@@ -592,65 +584,35 @@ em {
 
 /* Aba de Usuário */
 #usuario {
-  position: absolute;
-  bottom: 10px; /* Posiciona no canto inferior */
-  right: 200px; /* Move mais para a esquerda (ajuste conforme necessário) */
-  z-index: 1000;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 400px;
 }
 
 #botaoUsuario {
   font-weight: bold;
-  background-color: #88c3b5;
-  color: #6d6168;
+  background-color: #6d6168;
+  color: white;
   border: none;
   border-radius: 5px;
   padding: 8px 12px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid #333;
 }
 
 #botaoUsuario:hover {
   background-color: #6d6168;
+  color: white;
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilo da Aba de Usuário */
-#abaUsuario {
-  display: none;
-  position: absolute;
-  top: calc(100% + 5px); /* Aba posicionada logo abaixo do botão */
-  right: 0;
-  background-color: #fff;
-  color: #474044;
-  border: 2px solid #88c3b5; /* Adiciona uma borda */
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  min-width: 200px;
-  text-align: center;
+  box-shadow: 0 2.25px 12px rgba(0, 0, 0, 0.3);
 }
 
 #abaUsuario p {
   margin-bottom: 15px;
   font-size: 1rem;
   color: #474044;
-}
-
-#abaUsuario button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 12px;
-  cursor: pointer;
-  margin-top: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
 }
 
 #abaUsuario button:hover {
@@ -666,4 +628,428 @@ em {
 
 #abaUsuario.mostrar {
   display: block;
+}
+
+/* Footer */
+footer {
+  background-color: #88c3b5; /* Cor de fundo harmoniosa */
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+footer .footer-nav {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+footer .footer-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+footer .footer-nav a:hover {
+  color: #d0dccb; /* Cor ao passar o mouse */
+  transform: scale(1.05);
+}
+
+/* Responsividade para o footer */
+@media (min-width: 600px) {
+  footer {
+      font-size: 1rem;
+  }
+
+  footer .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  footer .footer-nav {
+      margin-top: 0;
+  }
+}
+
+/* Estilo do Filtro de Datas */
+#filtro-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#filtro-data label {
+  font-size: 1rem;
+  color: #6d6168;
+}
+
+#filtro-data input[type="date"] {
+  padding: 8px;
+  border: 1px solid #88c3b5;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #474044;
+}
+
+#filtro-data button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#filtro-data button:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+#baixarDados {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#baixarDados:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal.mostrar {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 30px 25px;
+  border: 1px solid #ccc;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.3s ease-in-out;
+  position: relative;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Títulos */
+.modal-content h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Parágrafos */
+.modal-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Lista Ordenada */
+.modal-content ol {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.modal-content ol li {
+  margin-bottom: 10px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Links */
+.modal-content a {
+  color: #1a73e8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.modal-content a:hover {
+  color: #1558b0;
+}
+
+/* Botão de Fechar */
+.fechar {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  transition: color 0.3s ease;
+}
+
+.fechar:hover {
+  color: #333;
+}
+
+/* Botão Pronto para Começar */
+.modal-content button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 25px 20px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .modal-content p,
+  .modal-content ol li {
+    font-size: 0.95rem;
+  }
+
+  .fechar {
+    font-size: 1.25rem;
+    top: 12px;
+    right: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px 15px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-content p,
+  .modal-content ol li {
+    font-size: 0.9rem;
+  }
+
+  .modal-content button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .fechar {
+    font-size: 1rem;
+    top: 10px;
+    right: 15px;
+  }
+}
+
+header {
+  display: flex;
+  align-items: center; /* Alinha verticalmente os itens */
+  justify-content: space-between; /* Espaça o título e os botões */
+  padding: 10px 20px;
+  background-color: #88c3b5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative; /* Para não interferir com botões flutuantes como o de contraste */
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #6d6168;
+  flex-grow: 1; /* O título ocupa o espaço restante */
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+
+
+#ajudaBtn, #botaoUsuario {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#ajudaBtn {
+  margin-right: 400px; /* Aproxima do próximo botão */
+}
+
+
+#botaoUsuario {
+  margin-left: -400px; /* Ajuste para mover mais para a esquerda */
+}
+
+
+#ajudaBtn:hover, #botaoUsuario:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+#abaUsuario {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #88c3b5;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  margin-right: 200px;
+}
+
+#abaUsuario.mostrar {
+  display: block;
+}
+
+
+#ajudaBtn:hover {
+  background-color: #e67e22; /* Laranja mais escuro no hover */
+  transform: scale(1.05); /* Aumenta levemente ao passar o mouse */
+}
+
+#ajudaBtn:focus {
+  outline: 3px solid #f1c40f; /* Destaque ao focar com teclado */
+}
+
+/* Aba do usuário */
+#abaUsuario {
+  display: none; /* Inicialmente escondida */
+  position: absolute;
+  top: calc(100% + 5px); /* Aba aparece logo abaixo do botão */
+  right: 0; /* Alinhada à direita */
+  background-color: #ffffff; /* Fundo branco */
+  border: 1px solid #4CAF50; /* Borda com a cor do botão */
+  border-radius: 5px; /* Bordas arredondadas */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+  z-index: 1000; /* Para ficar acima de outros elementos */
+  width: 200px; /* Largura fixa */
+  text-align: left; /* Alinha o conteúdo à esquerda */
+}
+
+/* Mostra a aba do usuário */
+#abaUsuario.mostrar {
+  display: block;
+}
+
+/* Itens da aba */
+#abaUsuario p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#abaUsuario button {
+  display: block;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%; /* Botões ocupam toda a largura */
+  text-align: center; /* Centraliza o texto */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#abaUsuario button:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05); /* Efeito ao passar o mouse */
 }

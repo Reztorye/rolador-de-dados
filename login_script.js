@@ -1,25 +1,124 @@
-// Selecionar os elementos principais da tela de login
+// Seleção de elementos principais
 const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
-const togglePasswordButton = document.getElementById('togglePassword');
 const errorMessageDiv = document.getElementById('error-message');
+const registerErrorMessage = document.getElementById('register-error-message');
 
-// Criação do botão de acessibilidade
+// Função para alternar entre os formulários de login e registro
+function toggleForms(form) {
+    if (form === 'login') {
+        loginForm.classList.remove('oculto');
+        registerForm.classList.add('oculto');
+    } else {
+        loginForm.classList.add('oculto');
+        registerForm.classList.remove('oculto');
+    }
+}
+
+// Função de registro de usuário
+registerForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const username = document.getElementById('register-username').value.trim();
+    const password = document.getElementById('register-password').value.trim();
+    const confirmPassword = document.getElementById('register-confirm-password').value.trim();
+
+    // Validação: Campos preenchidos
+    if (!username || !password || !confirmPassword) {
+        registerErrorMessage.textContent = 'Por favor, preencha todos os campos.';
+        return;
+    }
+
+    // Validação: Senhas iguais
+    if (password !== confirmPassword) {
+        registerErrorMessage.textContent = 'As senhas não coincidem.';
+        return;
+    }
+
+    // Validação: Comprimento da senha
+    if (password.length < 8) {
+        registerErrorMessage.textContent = 'A senha deve ter pelo menos 8 caracteres.';
+        return;
+    }
+
+    // Validação: Usuário único
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    if (users.some(user => user.username === username)) {
+        registerErrorMessage.textContent = 'Usuário já existe.';
+        return;
+    }
+
+    // Registro do usuário
+    users.push({ username, password });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert('Conta criada com sucesso! Agora você pode fazer login.');
+    toggleForms('login');
+});
+
+// Função de login de usuário
+loginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    // Validação: Campos preenchidos
+    if (!username || !password) {
+        errorMessageDiv.textContent = 'Por favor, preencha todos os campos.';
+        return;
+    }
+
+    // Validação de credenciais
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+        alert('Login bem-sucedido!');
+        window.location.href = 'index.html'; // Redirecionar para a página principal
+    } else {
+        errorMessageDiv.textContent = 'Usuário ou senha incorretos.';
+    }
+});
+
+// Função "Esqueci a senha"
+function esqueciSenha() {
+    const username = prompt('Digite seu nome de usuário:');
+    if (!username) return;
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username);
+
+    if (user) {
+        const novaSenha = prompt('Digite sua nova senha (mínimo 8 caracteres):');
+        if (novaSenha && novaSenha.length >= 8) {
+            user.password = novaSenha;
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Senha redefinida com sucesso!');
+        } else {
+            alert('Senha inválida. Deve conter pelo menos 8 caracteres.');
+        }
+    } else {
+        alert('Usuário não encontrado.');
+    }
+}
+
+// Função para alternar contraste alto
 const botaoAcessibilidadeLogin = document.createElement('button');
 botaoAcessibilidadeLogin.id = 'botaoContrasteLogin';
 botaoAcessibilidadeLogin.textContent = 'Ativar Contraste Alto';
 botaoAcessibilidadeLogin.classList.add('acessibilidade-botao');
 document.body.appendChild(botaoAcessibilidadeLogin);
 
-// Função para ativar/desativar o modo de contraste alto
 botaoAcessibilidadeLogin.addEventListener('click', () => {
     const body = document.body;
     const contrasteAtivo = body.classList.toggle('contraste-alto');
     botaoAcessibilidadeLogin.textContent = contrasteAtivo ? 'Desativar Contraste Alto' : 'Ativar Contraste Alto';
 });
 
-// Estilos para o modo de contraste alto e botão de acessibilidade
+// Adicionar estilos para o contraste alto
 const estiloContrasteAltoLogin = document.createElement('style');
 estiloContrasteAltoLogin.innerHTML = `
   .contraste-alto {
@@ -30,19 +129,6 @@ estiloContrasteAltoLogin.innerHTML = `
     background-color: #000 !important;
     color: #ff0 !important;
     border-color: #ff0 !important;
-  }
-  .contraste-alto input[type="text"],
-  .contraste-alto input[type="password"],
-  .contraste-alto button {
-    border: 1px solid #ff0 !important;
-  }
-  .contraste-alto body {
-    background: #000 !important;
-    background-image: none !important;
-  }
-  .contraste-alto {
-    background: #000 !important;
-    background-image: none !important;
   }
   #botaoContrasteLogin {
     position: fixed;
@@ -62,38 +148,3 @@ estiloContrasteAltoLogin.innerHTML = `
   }
 `;
 document.head.appendChild(estiloContrasteAltoLogin);
-
-// Função para alternar a visibilidade da senha
-togglePasswordButton.addEventListener('click', () => {
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  togglePasswordButton.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
-  console.log('Senha visível:', type === 'text');
-});
-
-// Evento de envio do formulário
-loginForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Evita o envio padrão do formulário
-
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  console.log('Tentativa de login com usuário:', username);
-
-  if (!username || !password) {
-    errorMessageDiv.textContent = 'Por favor, preencha todos os campos.';
-    console.log('Erro: Campos obrigatórios não preenchidos');
-    return;
-  }
-
-  // Simulação de validação (exemplo simples)
-  if (username === 'admin' && password === '123456781') {
-    console.log('Login bem-sucedido');
-    errorMessageDiv.textContent = '';
-    // Redirecionar para a página index.html após login bem-sucedido
-    window.location.href = 'index.html';
-  } else {
-    errorMessageDiv.textContent = 'Usuário ou senha incorretos.';
-    console.log('Erro: Credenciais inválidas');
-  }
-});

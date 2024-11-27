@@ -182,6 +182,10 @@ function adicionarAoHistorico(detalhes, resultado) {
     historicoItem.style.padding = '10px';
     historicoItem.style.marginBottom = '10px';
 
+    const timestamp1 = new Date(); // Gera a data atual
+    const dataFormatada = timestamp1.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    historicoItem.setAttribute('data-date', dataFormatada);
+
     const timestamp = new Date().toLocaleString();
     const timestampDiv = document.createElement('div');
     timestampDiv.classList.add('timestamp');
@@ -204,6 +208,13 @@ function adicionarAoHistorico(detalhes, resultado) {
     historicoItem.appendChild(detalhesDiv);
     historicoItem.appendChild(totalDiv);
     historicoLista.prepend(historicoItem); // Adiciona ao início do histórico
+    const item = { detalhes, resultado, timestamp };
+
+    // Salvar no localStorage
+    let historico = JSON.parse(localStorage.getItem("historicoRolagens")) || [];
+    historico.push(item);
+    localStorage.setItem("historicoRolagens", JSON.stringify(historico));
+
 }
 
 // Limpar seleção de dados
@@ -328,13 +339,18 @@ document.querySelectorAll('[data-tooltip]').forEach((button) => {
 });
 
 // Função para apagar o histórico de rolagens
+// Função para apagar o histórico de rolagens
 function apagarHistorico() {
-    console.log("Apagando histórico de rolagens");
+    // Limpa o localStorage
+    localStorage.removeItem("historicoRolagens");
+
+    // Limpa o histórico da interface
     const historicoLista = document.getElementById("historicoLista");
-    while (historicoLista.firstChild) {
-        historicoLista.removeChild(historicoLista.firstChild); // Remove todos os itens do histórico
-    }
+    historicoLista.innerHTML = "";
+
+    alert("Histórico apagado com sucesso!");
 }
+
 
 // Função para alternar a visibilidade da aba de usuário
 function toggleAbaUsuario() {
@@ -351,10 +367,128 @@ function editarPerfil() {
     }
 }
 
-// Função para simular logout
 function logout() {
-    document.getElementById("nomeUsuario").textContent = "Visitante";
-    alert("Você foi desconectado.");
+    // Limpa as informações do usuário armazenadas localmente (se houver)
+    localStorage.removeItem('currentUser'); // Exemplo de dado de sessão
+    alert('Você saiu com sucesso!');
+    
+    // Redireciona para a página de login
+    window.location.href = 'login.html'; // Substitua 'login.html' pelo nome real da sua página de login
 }
 
 
+function aplicarFiltroPorData() {
+    const filtroData = document.getElementById("filtroData").value; // Data escolhida no input
+    if (!filtroData) {
+        alert("Por favor, selecione uma data."); // Alerta caso não tenha data
+        return;
+    }
+
+    // Seleciona todos os itens do histórico
+    const historicoItems = document.querySelectorAll(".historico-item");
+
+    // Filtra os itens com base na data
+    historicoItems.forEach(item => {
+        const itemDate = item.getAttribute("data-date"); // Data atribuída ao item no histórico
+        if (itemDate === filtroData) {
+            item.style.display = "block"; // Exibe itens que correspondem
+        } else {
+            item.style.display = "none"; // Oculta os demais
+        }
+    });
+}
+
+function limparFiltro() {
+    const historicoItems = document.querySelectorAll(".historico-item");
+    historicoItems.forEach(item => {
+        item.style.display = "block"; // Exibe todos os itens
+    });
+    document.getElementById("filtroData").value = ""; // Limpa o campo de data
+}
+
+function baixarDados() {
+    const historicoItems = document.querySelectorAll(".historico-item");
+    if (historicoItems.length === 0) {
+        alert("Não há dados no histórico para baixar.");
+        return;
+    }
+
+    // Cria um array com os dados do histórico
+    const dados = Array.from(historicoItems).map(item => {
+        const data = item.getAttribute("data-date");
+        const detalhes = item.querySelector(".detalhes").textContent;
+        const total = item.querySelector(".total").textContent;
+        return { data, detalhes, total };
+    });
+
+    // Converte os dados para JSON
+    const dadosJSON = JSON.stringify(dados, null, 2);
+
+    // Cria um blob e uma URL para download
+    const blob = new Blob([dadosJSON], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    // Cria um link para download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "historico_rolagens.json";
+    link.click();
+
+    // Libera a URL do blob
+    URL.revokeObjectURL(url);
+}
+
+function abrirAjuda() {
+    const modal = document.getElementById("modalAjuda");
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+
+    // Foca no primeiro elemento interativo dentro do modal
+    modal.querySelector("button").focus();
+}
+
+function fecharAjuda() {
+    const modal = document.getElementById("modalAjuda");
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+
+    // Retorna o foco ao botão de ajuda
+    document.getElementById("ajudaBtn").focus();
+}
+
+// Fecha o modal ao pressionar "ESC"
+window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        fecharAjuda();
+    }
+});
+
+// Fecha o modal ao clicar fora do conteúdo
+window.onclick = function (event) {
+    const modal = document.getElementById("modalAjuda");
+    if (event.target === modal) {
+        fecharAjuda();
+    }
+};
+
+
+// Restaurar o histórico ao carregar a página
+function exibirHistorico() {
+    const historicoLista = document.getElementById("historicoLista");
+    historicoLista.innerHTML = ""; // Limpa a lista atual
+
+    const historico = JSON.parse(localStorage.getItem("historicoRolagens")) || [];
+    historico.forEach(item => {
+        const historicoItem = document.createElement('div');
+        historicoItem.classList.add('historico-item');
+        historicoItem.innerHTML = `
+            <div><em>${item.timestamp}</em></div>
+            <div><strong>Detalhes:</strong> ${item.detalhes}</div>
+            <div><strong>Total:</strong> ${item.resultado}</div>
+        `;
+        historicoLista.prepend(historicoItem); // Adiciona ao início
+    });
+}
+
+// Chamar a função ao carregar a página
+document.addEventListener("DOMContentLoaded", exibirHistorico);
