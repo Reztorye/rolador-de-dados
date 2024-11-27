@@ -540,3 +540,130 @@ input[type="number"] {
 em {
   color: #6d6168;
 }
+
+/* Tooltip base */
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Quando visível */
+.tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-5px);
+}
+
+/* Para evitar overlap */
+.button-container {
+  position: relative;
+}
+
+.contraste-alto button:hover, .contraste-alto .dado:hover {
+  background-color: #ff0; /* Amarelo destacado */
+  color: #000; /* Texto preto */
+  transform: scale(1.125); /* Aumenta levemente o tamanho */
+  box-shadow: 0 0 10px #ff0; /* Adiciona um brilho ao botão */
+}
+
+#apagarHistorico {
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#apagarHistorico:hover {
+  background-color: #cc3a3a;
+  transform: translateY(-3px);
+}
+
+/* Aba de Usuário */
+#usuario {
+  position: absolute;
+  bottom: 10px; /* Posiciona no canto inferior */
+  right: 200px; /* Move mais para a esquerda (ajuste conforme necessário) */
+  z-index: 1000;
+}
+
+#botaoUsuario {
+  font-weight: bold;
+  background-color: #88c3b5;
+  color: #6d6168;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #333;
+}
+
+#botaoUsuario:hover {
+  background-color: #6d6168;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo da Aba de Usuário */
+#abaUsuario {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px); /* Aba posicionada logo abaixo do botão */
+  right: 0;
+  background-color: #fff;
+  color: #474044;
+  border: 2px solid #88c3b5; /* Adiciona uma borda */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 200px;
+  text-align: center;
+}
+
+#abaUsuario p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #474044;
+}
+
+#abaUsuario button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 12px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+#abaUsuario button:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de visibilidade */
+.oculto {
+  display: none;
+}
+
+#abaUsuario.mostrar {
+  display: block;
+}

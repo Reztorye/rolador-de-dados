@@ -304,3 +304,57 @@ estiloContrasteAlto.innerHTML = `
   }
 `;
 document.head.appendChild(estiloContrasteAlto);
+
+// Seleciona todos os botões com o atributo 'data-tooltip'
+document.querySelectorAll('[data-tooltip]').forEach((button) => {
+    // Cria o elemento da tooltip
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.textContent = button.getAttribute('data-tooltip');
+    document.body.appendChild(tooltip);
+
+    // Eventos de mouse para exibir a tooltip
+    button.addEventListener('mouseenter', (e) => {
+        const rect = button.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2}px`;
+        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 5}px`;
+        tooltip.classList.add('show');
+    });
+
+    // Oculta a tooltip ao sair do botão
+    button.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+    });
+});
+
+// Função para apagar o histórico de rolagens
+function apagarHistorico() {
+    console.log("Apagando histórico de rolagens");
+    const historicoLista = document.getElementById("historicoLista");
+    while (historicoLista.firstChild) {
+        historicoLista.removeChild(historicoLista.firstChild); // Remove todos os itens do histórico
+    }
+}
+
+// Função para alternar a visibilidade da aba de usuário
+function toggleAbaUsuario() {
+    const abaUsuario = document.getElementById("abaUsuario");
+    abaUsuario.classList.toggle("mostrar");
+}
+
+// Função para editar o perfil
+function editarPerfil() {
+    const nomeUsuario = prompt("Digite o seu nome:", "Visitante");
+    if (nomeUsuario) {
+        document.getElementById("nomeUsuario").textContent = nomeUsuario;
+        console.log("Nome de usuário atualizado para:", nomeUsuario);
+    }
+}
+
+// Função para simular logout
+function logout() {
+    document.getElementById("nomeUsuario").textContent = "Visitante";
+    alert("Você foi desconectado.");
+}
+
+
